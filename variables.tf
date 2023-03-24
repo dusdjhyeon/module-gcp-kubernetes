@@ -30,3 +30,7 @@ variable "gke_machine_type" {
 variable "gke_num_nodes" {
   default = 3
 }
+
+variable "gke_namespace" {
+  type = string
+}
