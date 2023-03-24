@@ -19,10 +19,6 @@ variable "vpc_name" {
   type = string
 }
 
-variable "cluster_subnet_ids" {
-  type = string
-}
-
 variable "gke_machine_type" {
   type = string
 }
