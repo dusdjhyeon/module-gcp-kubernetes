@@ -33,4 +33,5 @@ variable "gke_namespace" {
 
 variable "subnet_id" {
   type = string
+  default = "subnet"
 }
