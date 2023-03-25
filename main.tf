@@ -4,6 +4,7 @@ provider "google" {
 
 resource "google_container_cluster" "primary" {
   name                     = "${var.project_id}-gke"
+  project                  = var.project_id
   location                 = var.region
   min_master_version       = "1.23"
   remove_default_node_pool = true
@@ -31,7 +32,7 @@ resource "google_container_node_pool" "primary_nodes" {
 
     metadata = {
       disable-legacy-endpoints = "true"
-      namespace = var.gke_namespace
+      namespace                = var.gke_namespace
     }
   }
 }
