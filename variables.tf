@@ -30,3 +30,7 @@ variable "gke_num_nodes" {
 variable "gke_namespace" {
   type = string
 }
+
+variable "subnet_id" {
+  type = string
+}
