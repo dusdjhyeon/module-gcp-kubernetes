@@ -17,7 +17,3 @@ output "gke_cluster_endpoint" {
 output "gke_cert_data" {
   value = google_container_cluster.primary.master_auth[0].cluster_ca_certificate
 }
-
-output "kubeconfig" {
-  value = local_file.kubeconfig
-}
