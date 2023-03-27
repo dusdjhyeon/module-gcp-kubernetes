@@ -39,3 +39,7 @@ variable "subnet_id" {
 variable "google_client_access_token" {
   type = string
 }
+
+variable "kubeconfig" {
+  type = string
+}
