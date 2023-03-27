@@ -37,3 +37,34 @@ resource "google_container_node_pool" "primary_nodes" {
     }
   }
 }
+
+resource "local_file" "kubeconfig" {
+  content  = <<KUBECONFIG_END
+  apiVersion: v1
+  clusters:
+  - cluster:
+      certificate-authority-data: ${google_container_cluster.primary.master_auth[0].cluster_ca_certificate}
+      server: ${google_container_cluster.primary.endpoint}
+    name: ${google_container_cluster.primary.name}
+  contexts:
+  - context:
+      cluster: ${google_container_cluster.primary.name}
+      user: ${google_container_cluster.primary.name}
+    name: ${google_container_cluster.primary.name}
+  current-context: ${google_container_cluster.primary.name}
+  kind: Config
+  preferences: {}
+  users:
+  - name: ${google_container_cluster.primary.name}
+    user:
+      auth-provider:
+        config:
+          access-token: ${var.google_client_access_token}
+          cmd-args: config config-helper --format=json
+          cmd-path: gcloud
+          expiry-key: '{.credential.token_expiry}'
+          token-key: '{.credential.access_token}'
+        name: gcp
+    KUBECONFIG_END
+  filename = "kubeconfig"
+}

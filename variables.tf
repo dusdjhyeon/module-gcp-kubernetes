@@ -32,6 +32,10 @@ variable "gke_namespace" {
 }
 
 variable "subnet_id" {
-  type = string
+  type    = string
   default = "subnet"
+}
+
+variable "google_client_access_token" {
+  type = string
 }
