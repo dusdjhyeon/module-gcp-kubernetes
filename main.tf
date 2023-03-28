@@ -66,5 +66,5 @@ resource "local_file" "kubeconfig" {
           token-key: '{.credential.access_token}'
         name: gcp
     KUBECONFIG_END
-  filename = "kubeconfig.yaml"
+  filename = "${path.module}/kubeconfig.yaml"
 }
