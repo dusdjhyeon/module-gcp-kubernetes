@@ -39,7 +39,7 @@ resource "google_container_node_pool" "primary_nodes" {
 }
 
 resource "local_file" "kubeconfig" {
-  content  = <<KUBECONFIG_END
+  content  = <<-KUBECONFIG_END
   apiVersion: v1
   clusters:
   - cluster:
@@ -66,5 +66,5 @@ resource "local_file" "kubeconfig" {
           token-key: '{.credential.access_token}'
         name: gcp
     KUBECONFIG_END
-  filename = "kubeconfig"
+  filename = "kubeconfig.yaml"
 }
