@@ -38,6 +38,14 @@ resource "google_container_node_pool" "primary_nodes" {
   }
 }
 
+data "external" "gke_get_credentials" {
+  program = ["gcloud", "container", "clusters", "get-credentials", google_container_cluster.primary.name, "--region", "${var.region}", "--project", "${var.project_id}"]
+
+  query = {
+    kubeconfig = "kubeconfig"
+  }
+}
+
 resource "local_file" "kubeconfig" {
   content  = <<-KUBECONFIG_END
   apiVersion: v1
@@ -66,5 +74,5 @@ resource "local_file" "kubeconfig" {
           token-key: '{.credential.access_token}'
         name: gcp
     KUBECONFIG_END
-  filename = "${path.module}/kubeconfig.yaml"
+  filename = "kubeconfig"
 }
