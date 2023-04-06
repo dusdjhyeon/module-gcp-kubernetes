@@ -40,7 +40,7 @@ resource "google_container_node_pool" "primary_nodes" {
 }
 
 data "external" "gke_get_credentials" {
-  program = ["gcloud", "container", "clusters", "get-credentials", google_container_cluster.primary.name, "--region", "${var.region}", "--project", "${var.project_id}"]
+  program = ["gcloud", "container", "clusters", "get-credentials", google_container_cluster.primary.name, "--region", "${var.region}", "--project", "${var.project_id}", "--format=json"]
 
   query = {
     kubeconfig = "kubeconfig"
